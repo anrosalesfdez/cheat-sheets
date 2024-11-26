@@ -22,7 +22,9 @@ git merge: combines the changes from one Branch into another Branch, creating a 
 git diff: shows the differences two commits, branches, flies, or the working directory and the staging área
 
 git log: shows the history of commits in the current brach, along with their messages, authors and dates
+
 git log -1 --oneline
+
 Git log --oneline --all
 
 Git remote -v
@@ -33,3 +35,37 @@ Git fetch (solo trae la info)
 
 Git pull (hace fetch + merge) puede haber errores
 
+## Git fork manual
+
+1. Crear un nuevo repositorio en GitHub vacío: no marques opciones como incluir un README, .gitignore o licencia.
+
+2. Clonar el repositorio original a tu local:
+
+3. En el repo local configura upstream en lugar de origin:
+    
+    Renombra el remoto origin (que apunta al repositorio original) como upstream:
+
+    git remote rename origin upstream
+    
+    Comprueba que el cambio se hizo correctamente:
+
+    git remote -v
+
+4. Añade en el repo local otro repositorio remoto (origin):
+
+    git remote add origin https://github.com/<tu-usuario>/t5-numpy-mnist-nombre1-apellido1.git
+
+    Vuelve a verificar los remotos:
+
+    git remote -v
+
+5. Subir el contenido al nuevo repositorio (origin):
+    
+    git push -u origin master
+
+    Este comando establece la rama master como la rama por defecto para futuros pushes.
+
+6. A futuro, traer cambios del repositorio original (upstream):
+
+    git pull upstream master
+    
