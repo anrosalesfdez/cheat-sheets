@@ -35,6 +35,10 @@ Git fetch (solo trae la info)
 
 Git pull (hace fetch + merge) puede haber errores
 
+## Deshacer commits en local
+
+git reset --soft HEAD~2
+
 ## Git fork manual
 
 1. Crear un nuevo repositorio en GitHub vacío: no marques opciones como incluir un README, .gitignore o licencia.
