@@ -1,75 +1,124 @@
-# GIT
+# Git Commands Reference Guide
 
-git init: creates a new local repository in the current directory
+## Basic Git Commands
 
-git clone: copies an existing remote repository to your local machine
+### Repository Initialization and Cloning
+- **`git init`**: Creates a new local repository in the current directory
+- **`git clone`**: Copies an existing remote repository to your local machine
 
-git status: shows the state of your working directory and staging área
+### Branch Creation and Navigation
+- **`git branch`**: List local branches
+- **`git checkout mi-rama`**: Switches your working directory to a different branch or commit, discarding any uncommitted changes
+- **`git checkout -b firstname-lastname/rb`**: Creates and switches to a new branch
 
-git add: add changes in your working directory to he staging área, which is a temporary área where you can prepare your next commit
+#### Remote Repository Management
+- **`git checkout main`**: First move to the local main branch!
+- **`git fetch origin`**: Only retrieves information from the remote repository
+- **`git pull origin main`**: Performs fetch + merge (may cause errors) remote to main
+Other commands:
+- **`git remote -v`**: Shows the remote repositories configured for your local repository
 
-git commit -m "mensaje": records the changes in the staging área as a new snapshot in he local repository, along with  message describing the changes
+### Working with your Brach and Main Local Branch
+- **`git switch mi-rama`**: First move to the your branch!
+Discard your work
+- **`git reset --hard main`**: Leave your branch as main local one
+Merge your work
+Option 1
+- **`git merge main`**: does a merge commit 
+Option 2
+- **`git stash push -m "WWIP" --include-untracked`**: 
+- **`git rebase main`**: alignment mi-rama to main
+- **`git stash pop`**: take back your changes
 
-git commit --allow-empty -m "Listo para sincronizar"
+### Working with your Changes and your BNranch
+- **`git checkout mi-rama`**: First move to the your branch!
+- **`git status`**: Shows the state of your working directory and staging area
+- **`git add`**: Adds changes in your working directory to the staging area, which is a temporary area where you can prepare your next commit
+- **`git commit -m "message"`**: Records the changes in the staging area as a new snapshot in the local repository, along with a message describing the changes
+- **`git commit --allow-empty -m "Ready to sync"`**: Creates an empty commit with a message
 
-git checkout: switches your working directory to a different Branch or commit, discarding any uncommitted changes
-git checkout -b nombre1-apellido1/rb
+### Branching and Navigation
+- **`git checkout`**: Switches your working directory to a different branch or commit, discarding any uncommitted changes
+- **`git checkout -b firstname-lastname/rb`**: Creates and switches to a new branch
+- **`git branch`**: Lists, creates, or deletes branches
+- **`git merge`**: Combines the changes from one branch into another branch, creating a new commit if there are no conflicts
 
-Git branch
+### Viewing Information
+- **`git diff`**: Shows the differences between two commits, branches, files, or the working directory and the staging area
+- **`git log`**: Shows the history of commits in the current branch, along with their messages, authors, and dates
+- **`git log -1 --oneline`**: Shows the last commit in a single line format
+- **`git log --oneline --all`**: Shows all commits in a condensed format
 
-git merge: combines the changes from one Branch into another Branch, creating a new commit if there are no conflicts
+### Remote Repository Management
+- **`git push -u origin main`**: Pushes the main branch to the origin remote and sets up tracking
 
-git diff: shows the differences two commits, branches, flies, or the working directory and the staging área
+## Advanced Operations
 
-git log: shows the history of commits in the current brach, along with their messages, authors and dates
-
-git log -1 --oneline
-
-Git log --oneline --all
-
-Git remote -v
-
-git push -u origin main
-
-Git fetch (solo trae la info)
-
-Git pull (hace fetch + merge) puede haber errores
-
-## Deshacer commits en local
-
+### Undoing Local Commits
+```bash
 git reset --soft HEAD~2
+```
+This command undoes the last 2 commits while keeping the changes in the staging area.
 
-## Git fork manual
+## Manual Git Fork Process
 
-1. Crear un nuevo repositorio en GitHub vacío: no marques opciones como incluir un README, .gitignore o licencia.
+Follow these steps to manually fork a repository:
 
-2. Clonar el repositorio original a tu local:
+### 1. Create a New Empty Repository on GitHub
+- Create a new repository on GitHub
+- **Important**: Do not check options like including a README, .gitignore, or license
 
-3. En el repo local configura upstream en lugar de origin:
-    
-    Renombra el remoto origin (que apunta al repositorio original) como upstream:
+### 2. Clone the Original Repository Locally
+Clone the original repository to your local machine.
 
-    git remote rename origin upstream
-    
-    Comprueba que el cambio se hizo correctamente:
+### 3. Configure Upstream in the Local Repository
+Instead of using origin, configure upstream:
 
-    git remote -v
+**Rename the origin remote (which points to the original repository) as upstream:**
+```bash
+git remote rename origin upstream
+```
 
-4. Añade en el repo local otro repositorio remoto (origin):
+**Verify the change was made correctly:**
+```bash
+git remote -v
+```
 
-    git remote add origin https://github.com/<tu-usuario>/t5-numpy-mnist-nombre1-apellido1.git
+### 4. Add Another Remote Repository (origin) to the Local Repository
+```bash
+git remote add origin https://github.com/<your-username>/t5-numpy-mnist-firstname-lastname.git
+```
 
-    Vuelve a verificar los remotos:
+**Verify the remotes again:**
+```bash
+git remote -v
+```
 
-    git remote -v
+### 5. Upload Content to the New Repository (origin)
+```bash
+git push -u origin master
+```
+This command establishes the master branch as the default branch for future pushes.
 
-5. Subir el contenido al nuevo repositorio (origin):
-    
-    git push -u origin master
+### 6. Future: Pull Changes from the Original Repository (upstream)
+```bash
+git pull upstream master
+```
 
-    Este comando establece la rama master como la rama por defecto para futuros pushes.
+## Quick Reference Summary
 
-6. A futuro, traer cambios del repositorio original (upstream):
-
-    git pull upstream master
-    
+| Command | Purpose |
+|---------|---------|
+| `git init` | Initialize new repository |
+| `git clone` | Copy remote repository |
+| `git status` | Check working directory status |
+| `git add` | Stage changes |
+| `git commit` | Save staged changes |
+| `git push` | Upload changes to remote |
+| `git pull` | Download and merge changes |
+| `git fetch` | Download changes only |
+| `git branch` | Manage branches |
+| `git checkout` | Switch branches/commits |
+| `git merge` | Combine branches |
+| `git log` | View commit history |
+| `git diff` | Show differences |
